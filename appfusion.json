@@ -1,0 +1,32 @@
+{
+  "name": "my-polyglot-app",
+  "version": "0.1",
+  "modules": {
+    "ui": {
+      "web": "react",
+      "mobile": "flutter"
+    },
+    "logic": {
+      "web": "typescript",
+      "mobile": "kotlin"
+    },
+    "ai": "python",
+    "db": ["go", "node"],
+    "tests": ["typescript", "python"]
+  },
+  "platforms": ["web", "android", "ios"],
+  "interop": {
+    "method": "json",
+    "data-format": "json"
+  },
+  "ai_assist": {
+    "doc_sync": true,
+    "test_gen": true,
+    "code_linter": true
+  },
+  "deploy": {
+    "web": "vercel",
+    "mobile": "flutter_build.sh",
+    "backend": "docker"
+  }
+}
