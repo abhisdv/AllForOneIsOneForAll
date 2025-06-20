@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Git pre-commit hook to check for documentation updates
+
+echo "🔍 Checking for structural changes that might need documentation updates..."
+
+# Check if any directories were added/removed/modified
+STRUCTURAL_CHANGES=$(git diff --cached --name-only --diff-filter=ADM | grep -E '^(ui|logic|ai|db-layer|scripts|tests|deploy|meta)/')
+
+if [ -n "$STRUCTURAL_CHANGES" ]; then
+    echo "⚠️  Structural changes detected:"
+    echo "$STRUCTURAL_CHANGES"
+    echo ""
+    echo "💡 Consider updating docs/development/ARCHITECTURE.md to reflect these changes:"
+    echo "   ./scripts/update-docs.sh"
+    echo ""
+    echo "📝 You can skip this check with: git commit --no-verify"
+    echo ""
+    read -p "Continue with commit? (y/N): " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        exit 1
+    fi
+fi
+
+echo "✅ Pre-commit checks passed" 
